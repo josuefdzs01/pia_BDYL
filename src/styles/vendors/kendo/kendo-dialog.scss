@@ -1,0 +1,48 @@
+kendo-dialog {
+  .k-widget {
+    margin: 0 !important;
+    padding: 26px !important;
+    border-radius: 5px !important;
+    background-color: #FFFFFF !important;;
+    box-shadow: -4px 0 21px -9px rgba(0,0,0,0.5) !important;
+    width: 566px !important;
+    height: 253px !important;
+    min-width: 566px !important;
+    min-height: 253px !important;
+    max-width: 566px !important;
+    max-height: 253px !important;
+  }
+
+  .k-content {
+    margin: 71px 0 0 0 !important;
+    padding: 0 !important;
+    color: #435365;
+    font-size: 13px;
+    line-height: 18px;
+    text-align: center;
+  }
+
+  kendo-dialog-actions {
+    border: none !important;
+    display: block !important;
+
+    button {
+      cursor: pointer !important;
+      border: none !important;
+      border-radius: 9px  !important;
+      background-color: #F7F7FA !important;
+      height: 46px !important;
+      color: #0071FF !important;
+      width: 160px !important;
+      min-width: 160px !important;
+      max-width: 160px !important;
+      float: left;
+
+      &.k-primary {
+        color: #F7F7FA !important;
+        background-color: #0071FF !important;
+        float: right;
+      }
+    }
+  }
+}

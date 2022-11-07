@@ -1,0 +1,54 @@
+<!-- Default form register -->
+<div class="login">
+    <form class="text-center form-login p-5" [formGroup]="registerForm" (ngSubmit)="onRegister(registerForm.value)">
+      <div class="row">
+        <div class="col-sm-1">
+          <a class="d-flex" [routerLink]="['/loginConsultorio']"><i class="bi bi-arrow-left"></i> Regresar</a>
+        </div>
+      </div>
+      <i class="form-login-text bi bi-hospital"></i>
+      <p class="h2 mb-4">¿Nuevo consultorio?</p>
+      <p class="h4 mb-4"> Registrate </p>
+      <div class="mb-4">
+        <div class="row justify-content-center">
+          <div class="input-wrapper col-sm-6 mb-2">
+            <i class="input-icon-r bi bi-person"></i>
+            <input type="text" id="defaultRegisterFormFirstName" formControlName="nombre" class="input form-control" placeholder="Nombre de consultorio" required>
+          </div>
+          <div class="col-sm-6 mb-2 input-wrapper">
+            <i class="bi bi-telephone input-icon-r"></i>
+            <input type="text" id="defaultRegisterPhonePassword" formControlName="telefono" class="input form-control" placeholder="Telefono"
+              aria-describedby="defaultRegisterFormPhoneHelpBlock" maxlength="10" required>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-sm-6 mb-2 input-wrapper">
+            <i class="bi bi-envelope input-icon-r"></i>
+            <input type="email" id="defaultRegisterFormEmail" formControlName="email" class="input form-control" placeholder="Correo Electronico" required>
+          </div>
+          <div class="col-sm-6 mb-2 input-wrapper">
+            <i class="bi bi-geo-alt input-icon-r"></i>
+            <input type="text" id="defaultRegisterFormPassword" formControlName="address" class="input form-control" placeholder="Ejemplo: Monterrey NL"
+              aria-describedby="defaultRegisterFormPasswordHelpBlock" required>
+          </div>
+          <div class="col-sm-6 mb-2 input-wrapper">
+            <i class="bi bi-lock input-icon-r"></i>
+            <input type="password" id="defaultRegisterFormPassword" formControlName="password" class="input form-control" placeholder="Contraseña"
+              aria-describedby="defaultRegisterFormPasswordHelpBlock" minlength="10" required>
+          </div>
+        </div>
+      </div>
+      <!-- Password -->
+      <!-- Phone number -->
+      <!-- Sign up button -->
+      <!-- <button class="btn btn-custom1" type="button" (click)="onRegister(registerForm.value)">Registrarse</button> -->
+      <button class="btn btn-custom1" type="button" (click)="onRegister(registerForm.value)">Consulta</button>
+      <hr>
+      <!-- Terms of service -->
+      <p>Registro de consultorios,
+        <em>Registrate</em> y acepta nuestros
+        <a href="" target="_blank">Terminos y condiciones</a>
+      </p>
+    </form>
+  </div>
+  <!-- Default form register -->

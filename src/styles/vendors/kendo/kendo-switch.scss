@@ -1,0 +1,42 @@
+kendo-switch {
+  width: 7.5rem!important;
+  height: 30px;
+  text-align: center;
+
+  &.k-switch-off .k-switch-container {
+    background-color: #fff;
+  }
+  &.k-switch-on .k-switch-container {
+    background-color: #0071FF;
+    width: 1px !important;
+
+  }
+
+  &.k-switch-off .k-switch-container:hover {
+    background-color: #fff;
+  }
+
+  &.k-switch-on .k-switch-container:hover {
+    background-color: #0071FF;
+    width: 5px;
+  }
+
+  
+.k-switch-label-on, .k-switch-label-off {
+  text-align: center;
+}
+
+
+}
+/* MODAL FORM LABEL FOR SWITCH OF KENDO PLUGIN */
+.np-modal__form__kendoSwitchLabel {
+  color: #435365;
+  font-size: 15px;
+  line-height: 20px;
+  margin: 5px 0 0 4px !important;
+  width: 10px;
+
+  svg {
+    margin-left: 0 !important;
+  }
+}

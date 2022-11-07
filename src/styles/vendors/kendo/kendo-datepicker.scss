@@ -1,0 +1,26 @@
+kendo-datepicker {
+  .k-picker-wrap {
+    color: #656565;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-bottom: 1px solid black !important;
+    border-radius: 0 !important;
+  }
+
+  .k-state-focused {
+    background-color: transparent !important;
+  }
+
+  input {
+    color: #435365;
+    font-size: 15px;
+    line-height: 19px;
+    padding: 0 0 10px 15px !important;
+  }
+
+  .k-calendar-view .k-link {
+    justify-content: flex-start;
+    padding: 0;
+  }
+}
