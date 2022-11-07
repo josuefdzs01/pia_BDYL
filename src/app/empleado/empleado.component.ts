@@ -21,4 +21,12 @@ export class EmpleadoComponent implements OnInit {
     })
   }
 
+  onEdit(){
+    console.log('Editar')
+  }
+
+  onDelete(){
+    console.log('Eliminar');
+  }
+
 }

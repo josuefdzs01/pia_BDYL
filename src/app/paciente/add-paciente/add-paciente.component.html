@@ -1,1 +1,71 @@
-<p>add-paciente works!</p>
+<div class="modal-header">
+    <h5 class="modal-title">Nuevo paciente</h5>
+    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body form-empleado">
+    <div class="row">
+      <div class="col-12">
+        <h4> Datos personales </h4>
+      </div>
+      <div class="col-6">
+        <p> Nombre: </p>
+        <input type="text" id="nameEmpleado" class="input form-control" placeholder="Nombre completo">
+      </div>
+      <div class="col-6">
+        <p> Correo electronico: </p>
+        <input type="text" id="emailEmpleado" class="input form-control" placeholder="Correo electronico">
+      </div>
+      <div class="col-6">
+        <p> Telefono: </p>
+        <input type="number" id="phoneEmpleado" class="input form-control" placeholder="Telefono">
+      </div>
+      <div class="col-6">
+        <p> Dirección: </p>
+        <input type="text" id="addressEmpleado" class="input form-control" placeholder="Dirección de domicilio">
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h4> Datos de contacto de emergencia </h4>
+          </div>
+        <div class="col-6">
+          <p> Nombre: </p>
+          <input type="text" id="nameEmpleado" class="input form-control" placeholder="Nombre completo">
+        </div>
+        <div class="col-6">
+          <p> Correo electronico: </p>
+          <input type="text" id="emailEmpleado" class="input form-control" placeholder="Correo electronico">
+        </div>
+        <div class="col-12">
+          <p> Telefono: </p>
+          <input type="number" id="phoneEmpleado" class="input form-control" placeholder="Telefono">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h4> Consulta </h4>
+        </div>
+        <div class="col-4">
+          <p> Peso: </p>
+          <input type="text" id="emailEmpleado" class="input form-control" placeholder="Kg">
+        </div>
+        <div class="col-4">
+          <p> Altura: </p>
+          <input type="text" id="phoneEmpleado" class="input form-control" placeholder="Cm">
+        </div>
+        <div class="col-4">
+            <p> Temperatura: </p>
+            <input type="text" id="phoneEmpleado" class="input form-control" placeholder="Centigrados">
+          </div>
+        <div class="col-12">
+          <p> Padecimientos: </p>
+          <textarea name="padecimiento" id="padecimiento" cols="63" rows="10"></textarea>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary">Guardar</button>
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+</div>
