@@ -13,6 +13,8 @@ import { AuthServiceService } from '../services/auth-service.service';
 export class RegisterComponent implements OnInit {
   public documentId: any;
   public currentStatus = 1;
+  
+  ciudad: any=[];
 
   consul: user[] = []
 
@@ -20,8 +22,8 @@ export class RegisterComponent implements OnInit {
     nombre: new FormControl('', [Validators.required]),
     telefono: new FormControl('', [Validators.required, Validators.maxLength(10)]),
     email: new FormControl('', [Validators.required]),
-    address: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required, Validators.minLength(6)])
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    ciudad: new FormControl('', [Validators.required])
   })
 
 
@@ -33,12 +35,18 @@ export class RegisterComponent implements OnInit {
       nombre: '',
       telefono: '',
       email: '',
-      address: '',
-      password: ''
+      password: '',
+      ciudad: ''
     })
   }
 
   ngOnInit(): void {
+    this._spinner.show();
+    this._authService.getAllCiudad().then((response:any) => {
+      this.ciudad = response;
+      console.log(this.ciudad)
+      this._spinner.hide();
+    })
   }
 
   onRegister(form: any){
@@ -47,26 +55,31 @@ export class RegisterComponent implements OnInit {
       name_consul: form.nombre,
       email_consul: form.email,
       phone_consul: form.telefono,
-      address: form.address,
-      password_consul: form.password
+      password_consul: form.password,
+      id_ciudadFK: form.ciudad
     }
     console.log(data);
     if(data.phone_consul.length >= 10){
-      if(data.password_consul.length >= 6){        
-        this._authService.registerConsultorio(data).then((response:any) => {
-          console.log(response);
-          if(response.StatusCode == 200){
-            this._spinner.hide();
-            this._toastr.success('Consultorio creado con exito.');
-            this._router.navigate(['/loginConsultorio']);
-          }else if(response.StatusCode == 100) {
+      if(data.password_consul.length >= 6){  
+        if(data.id_ciudadFK > 0){
+          this._authService.registerConsultorio(data).then((response:any) => {
+            console.log(response);
+            if(response.StatusCode == 200){
+              this._spinner.hide();
+              this._toastr.success('Consultorio creado con exito.');
+              this._router.navigate(['/loginConsultorio']);
+            }else if(response.StatusCode == 100) {
+              this._toastr.error('Hubo un error al crear el consultorio, intenta de nuevo.');
+              this._spinner.hide();
+            }
+          }).catch((error:any) => {
             this._toastr.error('Hubo un error al crear el consultorio, intenta de nuevo.');
             this._spinner.hide();
-          }
-        }).catch((error:any) => {
-          this._toastr.error('Hubo un error al crear el consultorio, intenta de nuevo.');
+          });
+        }else{
+          this._toastr.error('Seleccione la ciudad de vivienda');
           this._spinner.hide();
-        });
+        }    
       }else{
           this._toastr.error('La contraseña debe ser mayor a 6 digitos');
           this._spinner.hide();

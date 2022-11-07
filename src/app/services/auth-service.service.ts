@@ -43,6 +43,16 @@ export class AuthServiceService {
     });
   }
 
+  getAllCiudad() {
+    return new Promise((resolve, reject) => {
+      this.http.get(environment.url + 'Consultorio/getAllCiudad/').subscribe((response: any) => {
+        resolve(response);
+      }, (error) => {
+        reject(error);
+      });
+    });
+  }
+
   consultaConsultorio(request: any) {
     return new Promise((resolve, reject) => {
       this.http.get(environment.url + 'Consultorio/getAllConsultorio/').subscribe((response: any) => {

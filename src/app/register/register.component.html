@@ -28,8 +28,10 @@
           </div>
           <div class="col-sm-6 mb-2 input-wrapper">
             <i class="bi bi-geo-alt input-icon-r"></i>
-            <input type="text" id="defaultRegisterFormPassword" formControlName="address" class="input form-control" placeholder="Ejemplo: Monterrey NL"
-              aria-describedby="defaultRegisterFormPasswordHelpBlock" required>
+            <select formControlName="ciudad" id="ciudad-select">
+              <option value="default">Selecciona la ciudad</option>
+              <option *ngFor="let item of ciudad;" [value]="item.id_ciudad">{{item.nombre}}</option>
+            </select>
           </div>
           <div class="col-sm-6 mb-2 input-wrapper">
             <i class="bi bi-lock input-icon-r"></i>
