@@ -40,4 +40,14 @@ export class ConsultorioService {
       });
     });
   }
+
+  editEmpleado(request: any, userID: any) {
+    return new Promise((resolve, reject) => {
+      this.http.post(environment.url + 'empleado/edit/userID/' + userID, request).subscribe((response: any) => {
+        resolve(response);
+      }, (error) => {
+        reject(error);
+      });
+    });
+  }
 }

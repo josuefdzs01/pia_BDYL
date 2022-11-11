@@ -83,7 +83,7 @@
 <div class="modal fade" id="editEmpleado" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content" >
-            <app-edit-empleado [datosEditar]="empleadoData"></app-edit-empleado>
+            <app-edit-empleado [datosEditar]="empleadoData" (reloadTable)="reloadTable()"></app-edit-empleado>
         </div>
     </div>
 </div>
