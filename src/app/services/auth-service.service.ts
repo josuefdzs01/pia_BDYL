@@ -35,7 +35,7 @@ export class AuthServiceService {
 
   loginEmpleado(request: any) {
     return new Promise((resolve, reject) => {
-      this.http.get(environment.url + 'empleado/loginEmpleado/user/' + request.email_consul +'/password/' + request.password_consul).subscribe((response: any) => {
+      this.http.get(environment.url + 'auth/loginEmpleado/user/' + request.email_consul +'/password/' + request.password_consul).subscribe((response: any) => {
         this.responseEmpleado = JSON.parse(response.body);
         resolve(response);
       }, (error) => {
