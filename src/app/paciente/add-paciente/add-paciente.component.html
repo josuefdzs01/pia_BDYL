@@ -5,67 +5,79 @@
     </button>
 </div>
 <div class="modal-body form-empleado">
+  <form class="text-center p-5 pt-0" [formGroup]="pacienteForm" (ngSubmit)="onAddConsulta(pacienteForm.value)">
     <div class="row">
       <div class="col-12">
         <h4> Datos personales </h4>
       </div>
       <div class="col-6">
         <p> Nombre: </p>
-        <input type="text" id="nameEmpleado" class="input form-control" placeholder="Nombre completo">
+        <input type="text" id="namePaciente" formControlName="namePaciente" class="input form-control" placeholder="Nombre completo">
       </div>
       <div class="col-6">
         <p> Correo electronico: </p>
-        <input type="text" id="emailEmpleado" class="input form-control" placeholder="Correo electronico">
+        <input type="text" id="emailPaciente" formControlName="emailPaciente" class="input form-control" placeholder="Correo electronico">
       </div>
       <div class="col-6">
         <p> Telefono: </p>
-        <input type="number" id="phoneEmpleado" class="input form-control" placeholder="Telefono">
+        <input type="number" id="phonePaciente" formControlName="phonePaciente" class="input form-control" placeholder="Telefono">
       </div>
       <div class="col-6">
         <p> Dirección: </p>
-        <input type="text" id="addressEmpleado" class="input form-control" placeholder="Dirección de domicilio">
+        <input type="text" id="addressPaciente" formControlName="addressPaciente" class="input form-control" placeholder="Dirección de domicilio">
       </div>
     </div>
+  </form>
+  <form class="text-center p-5 pt-0" [formGroup]="contactoEmergForm" (ngSubmit)="onAddConsulta(contactoEmergForm.value)">
     <div class="row">
         <div class="col-12">
             <h4> Datos de contacto de emergencia </h4>
           </div>
         <div class="col-6">
           <p> Nombre: </p>
-          <input type="text" id="nameEmpleado" class="input form-control" placeholder="Nombre completo">
+          <input type="text" id="nameEmergencia" formControlName="nameEmergencia" class="input form-control" placeholder="Nombre completo">
         </div>
         <div class="col-6">
           <p> Correo electronico: </p>
-          <input type="text" id="emailEmpleado" class="input form-control" placeholder="Correo electronico">
+          <input type="text" id="emailEmergencia" formControlName="emailEmergencia" class="input form-control" placeholder="Correo electronico">
         </div>
         <div class="col-12">
           <p> Telefono: </p>
-          <input type="number" id="phoneEmpleado" class="input form-control" placeholder="Telefono">
+          <input type="number" id="phoneEmergencia" formControlName="phoneEmergencia" class="input form-control" placeholder="Telefono">
         </div>
     </div>
-    <div class="row">
+  </form>
+    <!-- <div class="row">
         <div class="col-12">
             <h4> Consulta </h4>
         </div>
         <div class="col-4">
           <p> Peso: </p>
-          <input type="text" id="emailEmpleado" class="input form-control" placeholder="Kg">
+          <input type="text" id="pesoConsulta" formControlName="pesoConsulta" class="input form-control" placeholder="Kg">
         </div>
         <div class="col-4">
           <p> Altura: </p>
-          <input type="text" id="phoneEmpleado" class="input form-control" placeholder="Cm">
+          <input type="text" id="alturaConsulta" formControlName="alturaConsulta" class="input form-control" placeholder="Cm">
         </div>
         <div class="col-4">
             <p> Temperatura: </p>
-            <input type="text" id="phoneEmpleado" class="input form-control" placeholder="Centigrados">
+            <input type="text" id="temperaturaConsulta" formControlName="temperaturaConsulta" class="input form-control" placeholder="Centigrados">
           </div>
         <div class="col-12">
           <p> Padecimientos: </p>
-          <textarea name="padecimiento" id="padecimiento" cols="63" rows="10"></textarea>
+          <textarea name="padecimiento" id="padecimiento" formControlName="padecimiento" cols="63" rows="10"></textarea>
         </div>
-    </div>
+    </div> -->
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-primary">Guardar</button>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addConsulta">Siguiente</button>
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+</div>
+
+<div class="modal fade" id="addConsulta" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content" >
+          
+      </div>
+  </div>
 </div>

@@ -1,9 +1,16 @@
 <div class="row" style="align-items: center;">
-    <div class="col-6" style="padding: 20px 20px 20px 30px;">
-        <h3>Lista de pacientes</h3>
+    <div class="row">
+        <div class="col-6 name-session">
+            <a>Bienvenido Doctor {{nameEmpleado}}</a>
+        </div>
+        <div class="col-6 close-session">
+            <a [routerLink]="['/loginEmpleado']">Cerrar sesión</a>
+        </div>
     </div>
-    <div class="col-6 close-session">
-        <a [routerLink]="['/loginEmpleado']">Cerrar sesión</a>
+    <div class="row">
+        <div class="col-12" style="padding: 20px 20px 20px 30px;">
+            <h3>Lista de pacientes</h3>
+        </div>
     </div>
 </div>
 <div>
@@ -35,7 +42,7 @@
             </kendo-grid-column>
             <kendo-grid-column field="phone_paciente" title="Telefono" [headerClass]="{'myClass': true}" [width]="120">
             </kendo-grid-column>
-            <kendo-grid-column field="address" title="Dirección" [headerClass]="{'myClass': true}" [width]="120">
+            <kendo-grid-column field="id_ciudadPacFK" title="Dirección" [headerClass]="{'myClass': true}" [width]="120">
             </kendo-grid-column>
             <kendo-grid-column field="id_contacto" title="Contacto de emergencia" [headerClass]="{'myClass': true}" [width]="120">
             </kendo-grid-column>

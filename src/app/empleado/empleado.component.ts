@@ -5,6 +5,7 @@ import { AuthServiceService } from '../services/auth-service.service';
 import { ConsultorioService } from '../services/consultorio.service';
 import { ConsultorioData } from '../models/dataConsultorio';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 declare var $: any;
 
 @Component({
@@ -21,14 +22,19 @@ export class EmpleadoComponent implements OnInit {
   constructor(private _consultorio: ConsultorioService,
     private _auth: AuthServiceService,
     private _toastr: ToastrService,
+    private _router: Router,
     private _spinner: NgxSpinnerService) {
       this.gridView = []
      }
 
   ngOnInit(): void {
-    this.nameConsultorio = this._auth.responseLogin[0]['name_consul'];
-    this.idConsultorio = this._auth.responseLogin[0]['id_consul'];
-    this.getAllEmpleados(this.idConsultorio)
+    if(this._auth.responseLogin.length == 0){
+      this._router.navigate(['/loginConsultorio']);
+    }else{
+      this.nameConsultorio = this._auth.responseLogin[0]['name_consul'];
+      this.idConsultorio = this._auth.responseLogin[0]['id_consul'];
+      this.getAllEmpleados(this.idConsultorio)
+    }
   }
 
   getAllEmpleados(userID:any){
