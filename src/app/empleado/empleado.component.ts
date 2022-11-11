@@ -51,8 +51,7 @@ export class EmpleadoComponent implements OnInit {
 
   onEdit(data:any){
     console.log('Editar')
-    // this.empleadoData = data;
-    this._consultorio.datosEmpleado = data;
+    this.empleadoData = data;
     $('#editEmpleado').modal('show');
   }
 

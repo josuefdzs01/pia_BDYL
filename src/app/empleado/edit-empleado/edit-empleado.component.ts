@@ -1,5 +1,5 @@
 import { empleadoData } from './../../models/dataEmpleado';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -11,8 +11,8 @@ import { ConsultorioService } from 'src/app/services/consultorio.service';
   selector: 'app-edit-empleado',
   templateUrl: './edit-empleado.component.html'
 })
-export class EditEmpleadoComponent implements OnInit {
-  // @Input() datosEditar: empleadoData[];
+export class EditEmpleadoComponent implements OnInit, OnChanges {
+  @Input() datosEditar: any;
 
   ciudad: any=[];
   puesto: any=[];
@@ -48,7 +48,19 @@ export class EditEmpleadoComponent implements OnInit {
     this.getAllPuesto();
     this.getAllTurno();
     this.getAllCity();
-    console.log(this._consultorio.datosEmpleado);
+  }
+
+  ngOnChanges(){
+    console.log(this.datosEditar);
+    this.editEmpleadoForm.setValue({
+      nombre: this.datosEditar.name_empleado,
+      email: this.datosEditar.email_empleado,
+      telefono: this.datosEditar.phone_empleado,
+      password: this.datosEditar.password_empleado,
+      ciudad: this.datosEditar.id_ciudadEmpFK,
+      puesto: this.datosEditar.id_puesto,
+      turno: this.datosEditar.id_turno
+    })
   }
 
   getAllCity(){

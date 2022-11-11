@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -11,7 +11,7 @@ declare var $: any;
   selector: 'app-add-empleado',
   templateUrl: './add-empleado.component.html'
 })
-export class AddEmpleadoComponent implements OnInit {
+export class AddEmpleadoComponent implements OnInit, OnChanges {
   @Input() consultorioID: any;
   @Output() saveEmpleado = new EventEmitter();
   @Output() reloadTable = new EventEmitter();
@@ -49,6 +49,10 @@ export class AddEmpleadoComponent implements OnInit {
     this.getAllCity()
     this.getAllPuesto()
     this.getAllTurno()
+  }
+
+  ngOnChanges() {
+      
   }
 
   getAllCity(){
