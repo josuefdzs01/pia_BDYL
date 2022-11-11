@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { GridModule } from '@progress/kendo-angular-grid';
+import { EditEmpleadoComponent } from './empleado/edit-empleado/edit-empleado.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { GridModule } from '@progress/kendo-angular-grid';
     EmpleadoComponent,
     PacienteComponent,
     AddPacienteComponent,
-    AddEmpleadoComponent
+    AddEmpleadoComponent,
+    EditEmpleadoComponent
   ],
   imports: [
     BrowserModule,

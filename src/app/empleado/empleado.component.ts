@@ -1,32 +1,76 @@
+import { empleadoData } from './../models/dataEmpleado';
 import { Component, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { AuthServiceService } from '../services/auth-service.service';
 import { ConsultorioService } from '../services/consultorio.service';
+import { ConsultorioData } from '../models/dataConsultorio';
+import { ToastrService } from 'ngx-toastr';
+declare var $: any;
 
 @Component({
   selector: 'app-empleado',
   templateUrl: './empleado.component.html'
 })
 export class EmpleadoComponent implements OnInit {
-  gridView: any[] = [];
+  gridView: any[];
 
-  constructor(private _consultorio: ConsultorioService) { }
+  nameConsultorio:any ;
+  idConsultorio:any ;
+  empleadoData: any;
+
+  constructor(private _consultorio: ConsultorioService,
+    private _auth: AuthServiceService,
+    private _toastr: ToastrService,
+    private _spinner: NgxSpinnerService) {
+      this.gridView = []
+     }
 
   ngOnInit(): void {
-    this.getAllEmpleados()
+    this.nameConsultorio = this._auth.responseLogin[0]['name_consul'];
+    this.idConsultorio = this._auth.responseLogin[0]['id_consul'];
+    this.getAllEmpleados(this.idConsultorio)
   }
 
-  getAllEmpleados(){
-    this._consultorio.getAllEmpleados().then((response:any) => {
-      console.log(response)
-      this.gridView = response;
+  getAllEmpleados(userID:any){
+    this._consultorio.getAllEmpleados(userID).then((response:any) => {
+      console.log(response);
+      if(response.length >= 1){
+        this.gridView = response;
+      }
     })
   }
 
-  onEdit(){
-    console.log('Editar')
+  /**
+   * @method reloadTable()
+   * @description: Reload the main table
+   */
+   reloadTable() {
+    this.gridView = [];
+    this.getAllEmpleados(this.idConsultorio);
   }
 
-  onDelete(){
-    console.log('Eliminar');
+  onEdit(data:any){
+    console.log('Editar')
+    // this.empleadoData = data;
+    this._consultorio.datosEmpleado = data;
+    $('#editEmpleado').modal('show');
+  }
+
+  onDelete(data:any){
+    console.log(data);
+    this._consultorio.deleteEmpleado(data.id_empleado).then((response:any) => {
+      if(response.StatusCode == 200){
+        this._toastr.success('Empleado eliminado correctamente');
+        this.reloadTable();
+      }else{
+        this._toastr.error('Hubo un error al eliminar empleado, intente nuevamente');
+      }
+    })
+  }
+
+  saveEmpleado(action: string): void {
+    this._spinner.show();
+    // this.getAllEmpleados();
   }
 
 }

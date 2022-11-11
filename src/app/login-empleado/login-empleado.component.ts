@@ -30,9 +30,7 @@ export class LoginEmpleadoComponent implements OnInit {
       email_consul: email,
       password_consul: password
     }
-    console.log(data);
     this._authService.loginEmpleado(data).then((response:any) => {
-      console.log(response);
       if(response.StatusCode == 200){
         this._toastr.success('Inicio sesión con exito');
         this._spinner.hide();

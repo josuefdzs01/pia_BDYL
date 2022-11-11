@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class AuthServiceService {
+  responseLogin: any[] = []
 
   constructor(private http: HttpClient) { }
 
@@ -20,25 +21,23 @@ export class AuthServiceService {
   }
 
   loginConsultorio(request: any) {
-    console.log(request);
     return new Promise((resolve, reject) => {
       this.http.get(environment.url + 'auth/loginConsul/user/' + request.email_consul +'/password/' + request.password_consul).subscribe((response: any) => {
+        this.responseLogin = JSON.parse(response.body);
+        console.log(this.responseLogin);
         resolve(response);
       }, (error) => {
         reject(error);
-        console.log(error)
       });
     });
   }
 
   loginEmpleado(request: any) {
-    console.log(request);
     return new Promise((resolve, reject) => {
       this.http.get(environment.url + 'empleado/loginEmpleado/user/' + request.email_consul +'/password/' + request.password_consul).subscribe((response: any) => {
         resolve(response);
       }, (error) => {
         reject(error);
-        console.log(error)
       });
     });
   }
@@ -46,6 +45,26 @@ export class AuthServiceService {
   getAllCiudad() {
     return new Promise((resolve, reject) => {
       this.http.get(environment.url + 'Consultorio/getAllCiudad/').subscribe((response: any) => {
+        resolve(response);
+      }, (error) => {
+        reject(error);
+      });
+    });
+  }
+
+  getAllPuesto() {
+    return new Promise((resolve, reject) => {
+      this.http.get(environment.url + 'Consultorio/getAllPuesto/').subscribe((response: any) => {
+        resolve(response);
+      }, (error) => {
+        reject(error);
+      });
+    });
+  }
+
+  getAllTurno() {
+    return new Promise((resolve, reject) => {
+      this.http.get(environment.url + 'Consultorio/getAllTurno/').subscribe((response: any) => {
         resolve(response);
       }, (error) => {
         reject(error);

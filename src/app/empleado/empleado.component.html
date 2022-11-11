@@ -1,9 +1,16 @@
 <div class="row" style="align-items: center;">
-    <div class="col-6" style="padding: 20px 20px 20px 30px;">
-        <h3>Lista de empleados</h3>
+    <div class="row">
+        <div class="col-6 name-session">
+            <a>Bienvenido consultorio {{nameConsultorio}}</a>
+        </div>
+        <div class="col-6 close-session">
+            <a [routerLink]="['/loginConsultorio']">Cerrar sesión</a>
+        </div>
     </div>
-    <div class="col-6 close-session">
-        <a [routerLink]="['/loginConsultorio']">Cerrar sesión</a>
+    <div class="row">
+        <div class="col-12" style="padding: 20px 20px 20px 30px;">
+            <h3>Lista de empleados</h3>
+        </div>
     </div>
 </div>
 <div>
@@ -15,50 +22,52 @@
 </div>
 <div id="materias">
     <div class="mt-5 mx-3">
-        <kendo-grid 
-            [kendoGridBinding]="gridView"
-            [pageSize]="10"
-            [pageable]="{pageSizes: [10, 25, 50, 100]}"
-            [sortable]="true"
-            [filterable]="true"
-            [resizable]="true"
-            [selectable]="true"
-            [navigable]="true"
-            kendoGridSelectBy="id"
-            style="width: 100%;"
-            [style]="{'text-align': 'left'}">
-            <kendo-grid-column field="id_empleado" title="Id" [headerClass]="{'myClass': true}" [width]="120">
-            </kendo-grid-column>
-            <kendo-grid-column field="name_empleado" title="Nombre empleado" [headerClass]="{'myClass': true}" [width]="120">
-            </kendo-grid-column>
-            <kendo-grid-column field="email_empleado" title="Correo electronico" [headerClass]="{'myClass': true}" [width]="120">
-            </kendo-grid-column>
-            <kendo-grid-column field="phone_empleado" title="Telefono" [headerClass]="{'myClass': true}" [width]="120">
-            </kendo-grid-column>
-            <kendo-grid-column field="address" title="Dirección" [headerClass]="{'myClass': true}" [width]="120">
-            </kendo-grid-column>
-            <kendo-grid-column field="turno_empleado" title="Turno" [headerClass]="{'myClass': true}" [width]="120">
-            </kendo-grid-column>
-            <kendo-grid-column field="puesto_empleado" title="Puesto" [headerClass]="{'myClass': true}" [width]="120">
-            </kendo-grid-column>
-            <kendo-grid-column field="acciones" title="Acciones" [width]="120">
-                <ng-template kendoGridCellTemplate let-dataItem>
-                    <div class="row justify-content-center">
-                        <div class="col-3">
-                            <a (click)="onEdit()"><i class="bi bi-pencil"></i></a>
+        <ng-container>
+            <kendo-grid 
+                [kendoGridBinding]="gridView"
+                [pageSize]="10"
+                [pageable]="{pageSizes: [10, 25, 50, 100]}"
+                [sortable]="true"
+                [filterable]="true"
+                [resizable]="true"
+                [selectable]="true"
+                [navigable]="true"
+                kendoGridSelectBy="id"
+                style="width: 100%;"
+                [style]="{'text-align': 'left'}">
+                <kendo-grid-column field="id_empleado" title="Id" [headerClass]="{'myClass': true}" [width]="120">
+                </kendo-grid-column>
+                <kendo-grid-column field="name_empleado" title="Nombre empleado" [width]="120">
+                </kendo-grid-column>
+                <kendo-grid-column field="email_empleado" title="Correo electronico" [width]="120">
+                </kendo-grid-column>
+                <kendo-grid-column field="phone_empleado" title="Telefono" [width]="120">
+                </kendo-grid-column>
+                <kendo-grid-column field="id_ciudadEmpFK" title="Dirección" [width]="120">
+                </kendo-grid-column>
+                <kendo-grid-column field="id_turno" title="Turno" [width]="120">
+                </kendo-grid-column>
+                <kendo-grid-column field="id_puesto" title="Puesto" [width]="120">
+                </kendo-grid-column>
+                <kendo-grid-column field="acciones" title="Acciones" [width]="120">
+                    <ng-template kendoGridCellTemplate let-dataItem>
+                        <div class="row justify-content-center">
+                            <div class="col-3">
+                                <a (click)="onEdit(dataItem)" data-bs-toggle="modal" data-bs-target="#editEmpleado"><i class="bi bi-pencil"></i></a>
+                            </div>
+                            <div class="col-3" style="color: red;">
+                                <a (click)="onDelete(dataItem)"><i class="bi bi-trash3"></i></a>
+                            </div>
                         </div>
-                        <div class="col-3" style="color: red;">
-                            <a (click)="onDelete()"><i class="bi bi-trash3"></i></a>
-                        </div>
+                    </ng-template>
+                </kendo-grid-column>
+                <ng-template kendoGridNoRecordsTemplate>
+                    <div class="col-12 mt-5">
+                        <app-not-records [label]="'No se encontraron registros disponibles.'"></app-not-records>
                     </div>
                 </ng-template>
-            </kendo-grid-column>
-            <ng-template kendoGridNoRecordsTemplate>
-                <div class="col-12 mt-5">
-                    <app-not-records [label]="'No se encontraron registros disponibles.'"></app-not-records>
-                </div>
-            </ng-template>
-        </kendo-grid>
+            </kendo-grid>
+        </ng-container>
     </div>
 </div>
 
@@ -66,7 +75,15 @@
 <div class="modal fade" id="addEmpleado" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content" >
-            <app-add-empleado></app-add-empleado>
+            <app-add-empleado [consultorioID]="idConsultorio" (reloadTable)="reloadTable()" (saveEmpleado)="($event)"></app-add-empleado>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editEmpleado" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" >
+            <app-edit-empleado></app-edit-empleado>
         </div>
     </div>
 </div>

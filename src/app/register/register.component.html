@@ -28,8 +28,8 @@
           </div>
           <div class="col-sm-6 mb-2 input-wrapper">
             <i class="bi bi-geo-alt input-icon-r"></i>
-            <select formControlName="ciudad" id="ciudad-select">
-              <option value="default">Selecciona la ciudad</option>
+            <select class="select-register" formControlName="ciudad" id="ciudad-select">
+              <option value="" disabled>Selecciona la ciudad</option>
               <option *ngFor="let item of ciudad;" [value]="item.id_ciudad">{{item.nombre}}</option>
             </select>
           </div>
@@ -44,7 +44,7 @@
       <!-- Phone number -->
       <!-- Sign up button -->
       <!-- <button class="btn btn-custom1" type="button" (click)="onRegister(registerForm.value)">Registrarse</button> -->
-      <button class="btn btn-custom1" type="button" (click)="onRegister(registerForm.value)">Consulta</button>
+      <button class="btn btn-custom1" type="button" (click)="onRegister(registerForm.value)">Registrar</button>
       <hr>
       <!-- Terms of service -->
       <p>Registro de consultorios,

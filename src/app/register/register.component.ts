@@ -42,9 +42,12 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this._spinner.show();
+    this.getAllCity();
+  }
+
+  getAllCity(){
     this._authService.getAllCiudad().then((response:any) => {
       this.ciudad = response;
-      console.log(this.ciudad)
       this._spinner.hide();
     })
   }
@@ -58,12 +61,10 @@ export class RegisterComponent implements OnInit {
       password_consul: form.password,
       id_ciudadFK: form.ciudad
     }
-    console.log(data);
     if(data.phone_consul.length >= 10){
       if(data.password_consul.length >= 6){  
         if(data.id_ciudadFK > 0){
           this._authService.registerConsultorio(data).then((response:any) => {
-            console.log(response);
             if(response.StatusCode == 200){
               this._spinner.hide();
               this._toastr.success('Consultorio creado con exito.');

@@ -15,6 +15,8 @@ export class LoginConsultorioComponent implements OnInit {
     password: new FormControl('')
   })
 
+  dataLogin: any;
+
   constructor(private _authService: AuthServiceService,
     private _router: Router,
     private _toastr: ToastrService,
@@ -30,9 +32,7 @@ export class LoginConsultorioComponent implements OnInit {
       email_consul: email,
       password_consul: password
     }
-    console.log(data);
     this._authService.loginConsultorio(data).then((response:any) => {
-      console.log(response);
       if(response.StatusCode == 200){
         this._toastr.success('Inicio sesión con exito');
         this._spinner.hide();

@@ -7,6 +7,8 @@ import { environment } from 'src/environments/environment';
 })
 export class ConsultorioService {
 
+  datosEmpleado: any[] = [];
+
   constructor(private http: HttpClient) { }
 
   registerEmpleado(request: any) {
@@ -19,13 +21,22 @@ export class ConsultorioService {
     });
   }
 
-  getAllEmpleados() {
+  getAllEmpleados(userID: any) {
     return new Promise((resolve, reject) => {
-      this.http.get(environment.url + 'empleado/getAllEmpleado').subscribe((response: any) => {
+      this.http.get(environment.url + 'empleado/getAllEmpleado/userID/' + userID).subscribe((response: any) => {
         resolve(response);
       }, (error) => {
         reject(error);
-        console.log(error)
+      });
+    });
+  }
+
+  deleteEmpleado(userID: any) {
+    return new Promise((resolve, reject) => {
+      this.http.delete(environment.url + 'empleado/delete/userID/' + userID).subscribe((response: any) => {
+        resolve(response);
+      }, (error) => {
+        reject(error);
       });
     });
   }

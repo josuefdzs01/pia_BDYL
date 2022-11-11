@@ -1,12 +1,12 @@
 <div class="modal-header">
     <h5 class="modal-title">Agregar empleado</h5>
-    <button type="button" id="closeModal" class="close" data-bs-dismiss="modal" aria-label="Close">
+    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
 </div>
 <div class="modal-body form-empleado">
     <div class="row">
-      <form class="text-center p-5 pt-0" [formGroup]="empleadoForm" (ngSubmit)="onAddEmpleado(empleadoForm.value)">
+      <form class="text-center p-5 pt-0" [formGroup]="editEmpleadoForm" (ngSubmit)="onEditEmpleado(editEmpleadoForm.value)">
         <div class="row">
           <div class="col-6">
             <p style="text-align: initial;"> Nombre: </p>
@@ -51,6 +51,6 @@
     </div>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="onAddEmpleado(empleadoForm.value)">Guardar</button>
-    <button type="button" class="btn btn-secondary" (click)="this.empleadoForm.reset()" data-bs-dismiss="modal">Cancelar</button>
+    <button type="button" class="btn btn-primary" (click)="onEditEmpleado(editEmpleadoForm.value)">Guardar</button>
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
 </div>
