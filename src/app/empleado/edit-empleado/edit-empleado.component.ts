@@ -58,11 +58,11 @@ export class EditEmpleadoComponent implements OnInit, OnChanges {
     console.log(this.datosEditar);
     this.empleadoID = this.datosEditar.id_empleado;
     this.editEmpleadoForm.setValue({
-      nombre: this.datosEditar.name_empleado,
-      email: this.datosEditar.email_empleado,
-      telefono: this.datosEditar.phone_empleado,
-      password: this.datosEditar.password_empleado,
-      ciudad: this.datosEditar.id_ciudadEmpFK,
+      nombre: this.datosEditar.nombre_emp,
+      email: this.datosEditar.email_emp,
+      telefono: this.datosEditar.phone_emp,
+      password: this.datosEditar.contraseña,
+      ciudad: this.datosEditar.id_ciudadEmp,
       puesto: this.datosEditar.id_puesto,
       turno: this.datosEditar.id_turno
     })
@@ -109,7 +109,7 @@ export class EditEmpleadoComponent implements OnInit, OnChanges {
               this._spinner.hide();
               this._toastr.success('Editaco correctamente.');
               this.reloadTable.emit('saveOk');
-              $('#closeModal').click();
+              $('#cancel-btn').click();
             }else if(response.StatusCode == 100) {
               this._toastr.error('Hubo un error al dar de alta el empleado, intenta de nuevo.');
               this._spinner.hide();

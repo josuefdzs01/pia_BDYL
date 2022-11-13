@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthServiceService } from '../services/auth-service.service';
 import { ConsultorioService } from '../services/consultorio.service';
 import { PacienteService } from '../services/paciente.service';
+declare var $: any;
 
 @Component({
   selector: 'app-paciente',
@@ -15,7 +16,7 @@ export class PacienteComponent implements OnInit {
 
   nameEmpleado:any ;
   idEmpleado:any ;
-  empleadoData: any;
+  pacienteData: any;
 
   constructor(private _consultorio: ConsultorioService,
     private _pacientes: PacienteService,
@@ -44,12 +45,25 @@ export class PacienteComponent implements OnInit {
     })
   }
 
-  onEdit(){
-    console.log('Editar')
+  onEdit(data:any){
+    this.pacienteData = data;
+    $('#editPaciente').modal('show');
   }
 
-  onDelete(){
+  onDelete(data:any){
     console.log('Eliminar');
   }
 
+  reloadTable() {
+    this.gridView = [];
+    this.getAllPacientes(this.idEmpleado);
+  }
+
+  onConsulta(data:any){
+    console.log('Consulta');
+  }
+
+  saveEmpleado(action: string): void {
+    // this._spinner.show();
+  }
 }

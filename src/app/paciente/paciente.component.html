@@ -16,7 +16,7 @@
 <div>
     <div class="row">
         <div class="col-12 mt-3 mx-3">
-            <button type="button" class="btn-FIMEprimary" data-bs-toggle="modal" data-bs-target="#addEmpleado"> <i class="bi bi-plus"></i> Nuevo paciente </button>
+            <button type="button" class="btn-FIMEprimary" data-bs-toggle="modal" data-bs-target="#addPaciente"> <i class="bi bi-plus"></i> Nuevo paciente </button>
         </div>
     </div>
 </div>
@@ -36,24 +36,27 @@
             [style]="{'text-align': 'left'}">
             <kendo-grid-column field="id_paciente" title="Id" [headerClass]="{'myClass': true}" [width]="120">
             </kendo-grid-column>
-            <kendo-grid-column field="name_paciente" title="Nombre paciente" [headerClass]="{'myClass': true}" [width]="120">
+            <kendo-grid-column field="nombre_pac" title="Nombre paciente" [headerClass]="{'myClass': true}" [width]="120">
             </kendo-grid-column>
-            <kendo-grid-column field="email_paciente" title="Correo electronico" [headerClass]="{'myClass': true}" [width]="120">
+            <kendo-grid-column field="email_pac" title="Correo electronico" [headerClass]="{'myClass': true}" [width]="120">
             </kendo-grid-column>
-            <kendo-grid-column field="phone_paciente" title="Telefono" [headerClass]="{'myClass': true}" [width]="120">
+            <kendo-grid-column field="phone_pac" title="Telefono" [headerClass]="{'myClass': true}" [width]="120">
             </kendo-grid-column>
-            <kendo-grid-column field="id_ciudadPacFK" title="Dirección" [headerClass]="{'myClass': true}" [width]="120">
+            <kendo-grid-column field="name_city" title="Dirección" [headerClass]="{'myClass': true}" [width]="120">
             </kendo-grid-column>
-            <kendo-grid-column field="id_contacto" title="Contacto de emergencia" [headerClass]="{'myClass': true}" [width]="120">
+            <kendo-grid-column field="name_cont" title="Contacto de emergencia" [headerClass]="{'myClass': true}" [width]="120">
             </kendo-grid-column>
             <kendo-grid-column field="acciones" title="Acciones" [width]="120">
                 <ng-template kendoGridCellTemplate let-dataItem>
                     <div class="row justify-content-center">
                         <div class="col-3">
-                            <a (click)="onEdit()"><i class="bi bi-pencil"></i></a>
+                            <a (click)="onEdit(dataItem)"><i class="bi bi-pencil"></i></a>
                         </div>
                         <div class="col-3" style="color: red;">
-                            <a (click)="onDelete()"><i class="bi bi-trash3"></i></a>
+                            <a (click)="onDelete(dataItem)"><i class="bi bi-trash3"></i></a>
+                        </div>
+                        <div class="col-3">
+                            <a (click)="onConsulta(dataItem)"><i class="bi bi-file-earmark"></i></a>
                         </div>
                     </div>
                 </ng-template>
@@ -68,10 +71,18 @@
 </div>
 
 
-<div class="modal fade" id="addEmpleado" tabindex="-1" role="dialog">
+<div class="modal fade" id="addPaciente" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content" >
-            <app-add-paciente></app-add-paciente>
+            <app-add-paciente [id_empleado]="idEmpleado" (reloadTable)="reloadTable()" (savePaciente)="($event)"></app-add-paciente>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editPaciente" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" >
+            <app-edit-paciente [datosEditar]="pacienteData" (reloadTable)="reloadTable()"></app-edit-paciente>
         </div>
     </div>
 </div>

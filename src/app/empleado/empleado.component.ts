@@ -31,8 +31,8 @@ export class EmpleadoComponent implements OnInit {
     if(this._auth.responseLogin.length == 0){
       this._router.navigate(['/loginConsultorio']);
     }else{
-      this.nameConsultorio = this._auth.responseLogin[0]['name_consul'];
-      this.idConsultorio = this._auth.responseLogin[0]['id_consul'];
+      this.nameConsultorio = this._auth.responseLogin[0]['Nombre'];
+      this.idConsultorio = this._auth.responseLogin[0]['ID'];
       this.getAllEmpleados(this.idConsultorio)
     }
   }
@@ -74,7 +74,7 @@ export class EmpleadoComponent implements OnInit {
   }
 
   saveEmpleado(action: string): void {
-    this._spinner.show();
+    // this._spinner.show();
     // this.getAllEmpleados();
   }
 

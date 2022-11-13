@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h5 class="modal-title">Nuevo paciente</h5>
+    <h5 class="modal-title">Editar paciente</h5>
     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -42,19 +42,19 @@
           </div>
         <div class="col-6">
           <p style="text-align: initial;"> Nombre: </p>
-          <input type="text" id="nameEmergencia" formControlName="nameEmergencia" class="input form-control" placeholder="Nombre completo" required>
+          <input type="text" id="nameEmergencia" formControlName="nameEmergencia" class="input form-control" placeholder="Nombre completo">
         </div>
         <div class="col-6">
           <p style="text-align: initial;"> Telefono: </p>
-          <input type="text" id="phoneEmergencia" formControlName="phoneEmergencia" class="input form-control" placeholder="Telefono" maxlength="10" required>
+          <input type="number" id="phoneEmergencia" formControlName="phoneEmergencia" class="input form-control" placeholder="Telefono">
         </div>
         <div class="col-12">
           <p style="text-align: initial;"> Correo electronico: </p>
-          <input type="text" id="emailEmergencia" formControlName="emailEmergencia" class="input form-control" placeholder="Correo electronico" required>
+          <input type="text" id="emailEmergencia" formControlName="emailEmergencia" class="input form-control" placeholder="Correo electronico">
         </div>
         <div class="col-12 mb-2 input-wrapper w-100">
           <p style="text-align: initial;"> Ciudad: </p>
-          <select class="select-register select-register--emp" formControlName="ciudad_contacto" id="ciudad-select" style="padding: 15px 15px 15px 0px;" required>
+          <select class="select-register select-register--emp" formControlName="ciudad_contacto" id="ciudad-select" required>
             <option value="" disabled>Selecciona la ciudad</option>
             <option *ngFor="let c of ciudad" [value]="c.id_ciudad">{{c.nombre}}</option>
           </select>
@@ -84,6 +84,6 @@
     </div> -->
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-primary" (click)="onAddPaciente(pacienteForm.value, contactoEmergForm.value)">Guardar</button>
-  <button type="button" id="closeModal" class="btn btn-secondary" (click)="resetForm()" data-bs-dismiss="modal">Cancelar</button>
+  <button type="button" class="btn btn-primary" (click)="onEditPaciente(pacienteForm.value, contactoEmergForm.value)">Guardar</button>
+  <button type="button" id="cancel-btn" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
 </div>

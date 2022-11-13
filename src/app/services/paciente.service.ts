@@ -18,9 +18,29 @@ export class PacienteService {
     });
   }
 
+  getAllContactos(emailContacto: any) {
+    return new Promise((resolve, reject) => {
+      this.http.get(environment.url + 'pacienteAPI/getAllContacto/emailCont/' + emailContacto).subscribe((response: any) => {
+        resolve(response);
+      }, (error) => {
+        reject(error);
+      });
+    });
+  }
+
   registerPaciente(request: any) {
     return new Promise((resolve, reject) => {
-      this.http.post(environment.url + 'pacienteAPI/registerEmpleado/', request).subscribe((response: any) => {
+      this.http.post(environment.url + 'pacienteAPI/registerPaciente/', request).subscribe((response: any) => {
+        resolve(response);
+      }, (error) => {
+        reject(error);
+      });
+    });
+  }
+
+  registerContacto(request: any) {
+    return new Promise((resolve, reject) => {
+      this.http.post(environment.url + 'pacienteAPI/registerContacto/', request).subscribe((response: any) => {
         resolve(response);
       }, (error) => {
         reject(error);
@@ -41,6 +61,16 @@ export class PacienteService {
   editPaciente(request: any, pacienteID: any) {
     return new Promise((resolve, reject) => {
       this.http.post(environment.url + 'pacienteAPI/edit/pacienteID/' + pacienteID, request).subscribe((response: any) => {
+        resolve(response);
+      }, (error) => {
+        reject(error);
+      });
+    });
+  }
+
+  editContacto(request: any, contactoID: any) {
+    return new Promise((resolve, reject) => {
+      this.http.post(environment.url + 'pacienteAPI/edit/contactoID/' + contactoID, request).subscribe((response: any) => {
         resolve(response);
       }, (error) => {
         reject(error);
