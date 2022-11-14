@@ -18,6 +18,8 @@ export class PacienteComponent implements OnInit {
   idEmpleado:any ;
   pacienteData: any;
 
+  datoConsulta: any;
+
   constructor(private _consultorio: ConsultorioService,
     private _pacientes: PacienteService,
     private _auth: AuthServiceService,
@@ -31,14 +33,12 @@ export class PacienteComponent implements OnInit {
     }else{
       this.nameEmpleado = this._auth.responseEmpleado[0]['name_empleado'];
       this.idEmpleado = this._auth.responseEmpleado[0]['id_empleado'];
-      console.log(this.nameEmpleado)
       this.getAllPacientes(this.idEmpleado);
     }
   }
 
   getAllPacientes(userID:any){
     this._pacientes.getAllPacientes(userID).then((response:any) => {
-      console.log(response);
       if(response.length >= 1){
         this.gridView = response;
       }
@@ -51,7 +51,17 @@ export class PacienteComponent implements OnInit {
   }
 
   onDelete(data:any){
-    console.log('Eliminar');
+    console.log(data);
+    this._pacientes.deletePaciente(data.id_paciente).then((response:any) => {
+      if(response.StatusCode == 200){
+        this._pacientes.deleteContacto(data.id_contacto).then((response2:any) => {
+          if(response2.StatusCode == 200){
+            this._toastr.success("Paciente eliminado correctamente!");
+            this.reloadTable()
+          }
+        })
+      }
+    })
   }
 
   reloadTable() {
@@ -61,9 +71,7 @@ export class PacienteComponent implements OnInit {
 
   onConsulta(data:any){
     console.log('Consulta');
-  }
-
-  saveEmpleado(action: string): void {
-    // this._spinner.show();
+    this.datoConsulta = data;
+    $('#addConsulta').modal('show');
   }
 }

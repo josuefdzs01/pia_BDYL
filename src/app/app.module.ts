@@ -19,6 +19,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { EditEmpleadoComponent } from './empleado/edit-empleado/edit-empleado.component';
 import { EditPacienteComponent } from './paciente/edit-paciente/edit-paciente.component';
+import { AddConsultaComponent } from './paciente/add-consulta/add-consulta.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { EditPacienteComponent } from './paciente/edit-paciente/edit-paciente.co
     AddPacienteComponent,
     AddEmpleadoComponent,
     EditEmpleadoComponent,
-    EditPacienteComponent
+    EditPacienteComponent,
+    AddConsultaComponent
   ],
   imports: [
     BrowserModule,

@@ -66,7 +66,6 @@ export class EditPacienteComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(){
-    console.log(this.datosEditar);
     this.pacienteID = this.datosEditar.id_paciente;
     this.pacienteForm.setValue({
       namePaciente: this.datosEditar.nombre_pac,
@@ -106,7 +105,6 @@ export class EditPacienteComponent implements OnInit, OnChanges {
   }
 
   onEditPaciente(dataPaciente:any, dataContacto:any){
-    console.log(dataPaciente,dataContacto);
     let contacto = {
       name_contacto: dataContacto.nameEmergencia,
       email_contacto: dataContacto.emailEmergencia,
@@ -115,7 +113,6 @@ export class EditPacienteComponent implements OnInit, OnChanges {
     }
     this._paciente.editContacto(contacto, this.datosEditar.id_contacto).then((response: any) => {
       this._paciente.getAllContactos(contacto.email_contacto).then((response2:any) => {
-        console.log(response2);
         let pacienteNew = {
           name_paciente: dataPaciente.namePaciente,
           email_paciente: dataPaciente.emailPaciente,
@@ -126,7 +123,6 @@ export class EditPacienteComponent implements OnInit, OnChanges {
           id_empleado: this.datosEditar.id_emp
         }
         this._paciente.editPaciente(pacienteNew, this.datosEditar.id_paciente).then((response3:any) => {
-          console.log(response3);
           if(response.StatusCode == 200){
             this._spinner.hide();
             this._toastr.success('Paciente editado correctamente.');

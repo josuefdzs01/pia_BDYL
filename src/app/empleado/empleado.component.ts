@@ -1,9 +1,7 @@
-import { empleadoData } from './../models/dataEmpleado';
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthServiceService } from '../services/auth-service.service';
 import { ConsultorioService } from '../services/consultorio.service';
-import { ConsultorioData } from '../models/dataConsultorio';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 declare var $: any;
@@ -39,7 +37,6 @@ export class EmpleadoComponent implements OnInit {
 
   getAllEmpleados(userID:any){
     this._consultorio.getAllEmpleados(userID).then((response:any) => {
-      console.log(response);
       if(response.length >= 1){
         this.gridView = response;
       }
@@ -56,7 +53,6 @@ export class EmpleadoComponent implements OnInit {
   }
 
   onEdit(data:any){
-    console.log('Editar')
     this.empleadoData = data;
     $('#editEmpleado').modal('show');
   }
@@ -72,10 +68,4 @@ export class EmpleadoComponent implements OnInit {
       }
     })
   }
-
-  saveEmpleado(action: string): void {
-    // this._spinner.show();
-    // this.getAllEmpleados();
-  }
-
 }

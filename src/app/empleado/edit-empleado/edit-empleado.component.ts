@@ -55,7 +55,6 @@ export class EditEmpleadoComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(){
-    console.log(this.datosEditar);
     this.empleadoID = this.datosEditar.id_empleado;
     this.editEmpleadoForm.setValue({
       nombre: this.datosEditar.nombre_emp,
@@ -91,7 +90,6 @@ export class EditEmpleadoComponent implements OnInit, OnChanges {
 
   onEditEmpleado(data:any){
     this._spinner.show()
-    console.log(this.empleadoID);
     data = {
       name_empleado: this.editEmpleadoForm.controls.nombre.value,
       email_empleado: this.editEmpleadoForm.controls.email.value,

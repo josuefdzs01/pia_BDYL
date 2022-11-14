@@ -51,7 +51,6 @@ export class AddPacienteComponent implements OnInit {
   }
 
   onAddPaciente(dataPac:any, dataCont:any){
-    console.log(dataPac,dataCont);
     let contacto = {
       name_contacto: dataCont.nameEmergencia,
       email_contacto: dataCont.emailEmergencia,
@@ -60,7 +59,6 @@ export class AddPacienteComponent implements OnInit {
     }
     this._paciente.registerContacto(contacto).then((response: any) => {
       this._paciente.getAllContactos(contacto.email_contacto).then((response2:any) => {
-        console.log(response2);
         let pacienteNew = {
           name_paciente: dataPac.namePaciente,
           email_paciente: dataPac.emailPaciente,
@@ -71,7 +69,6 @@ export class AddPacienteComponent implements OnInit {
           id_empleado: this.id_empleado
         }
         this._paciente.registerPaciente(pacienteNew).then((response3:any) => {
-          console.log(response3);
           if(response.StatusCode == 200){
             this._spinner.hide();
             this._toastr.success('Paciente dado de alta.');

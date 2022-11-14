@@ -13,7 +13,6 @@ declare var $: any;
 })
 export class AddEmpleadoComponent implements OnInit, OnChanges {
   @Input() consultorioID: any;
-  @Output() saveEmpleado = new EventEmitter();
   @Output() reloadTable = new EventEmitter();
   ciudad?: any=[];
   puesto?: any=[];

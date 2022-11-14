@@ -25,7 +25,6 @@ export class AuthServiceService {
     return new Promise((resolve, reject) => {
       this.http.get(environment.url + 'auth/loginConsul/user/' + request.email_consul +'/password/' + request.password_consul).subscribe((response: any) => {
         this.responseLogin = JSON.parse(response.body);
-        console.log(this.responseLogin);
         resolve(response);
       }, (error) => {
         reject(error);

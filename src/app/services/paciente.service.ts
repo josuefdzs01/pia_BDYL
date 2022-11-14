@@ -58,6 +58,16 @@ export class PacienteService {
     });
   }
 
+  deleteContacto(contactoID: any) {
+    return new Promise((resolve, reject) => {
+      this.http.delete(environment.url + 'pacienteAPI/delete/contactoID/' + contactoID).subscribe((response: any) => {
+        resolve(response);
+      }, (error) => {
+        reject(error);
+      });
+    });
+  }
+
   editPaciente(request: any, pacienteID: any) {
     return new Promise((resolve, reject) => {
       this.http.post(environment.url + 'pacienteAPI/edit/pacienteID/' + pacienteID, request).subscribe((response: any) => {
