@@ -1,3 +1,4 @@
+import { SecretarioComponent } from './secretario/secretario.component';
 import { EmpleadoComponent } from './empleado/empleado.component';
 import { PacienteComponent } from './paciente/paciente.component';
 import { RegisterComponent } from './register/register.component';
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: 'register', component:RegisterComponent},
   {path: 'paciente', component:PacienteComponent},
   {path: 'empleado', component:EmpleadoComponent},
+  {path: 'secretario', component:SecretarioComponent},
   {path: '', redirectTo: '/loginConsultorio', pathMatch: 'full'},
   {path: '**', redirectTo: '/loginConsultorio', pathMatch: 'full'}
 ];

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
@@ -11,7 +11,7 @@ declare var $: any;
   selector: 'app-paciente',
   templateUrl: './paciente.component.html'
 })
-export class PacienteComponent implements OnInit {
+export class PacienteComponent implements OnInit, OnChanges {
   gridView: any[] = [];
 
   nameEmpleado:any ;
@@ -31,14 +31,21 @@ export class PacienteComponent implements OnInit {
     if(this._auth.responseEmpleado.length == 0){
       this._router.navigate(['/loginEmpleado']);
     }else{
+
       this.nameEmpleado = this._auth.responseEmpleado[0]['name_empleado'];
       this.idEmpleado = this._auth.responseEmpleado[0]['id_empleado'];
       this.getAllPacientes(this.idEmpleado);
     }
   }
 
+  ngOnChanges(): void {
+      this._consultorio.getEmpleados(this.idEmpleado).then((empleados:any) => {
+        console.log(empleados)
+      })
+  }
+
   getAllPacientes(userID:any){
-    this._pacientes.getAllPacientes(userID).then((response:any) => {
+    this._pacientes.getPacientes(userID).then((response:any) => {
       if(response.length >= 1){
         this.gridView = response;
       }
@@ -51,7 +58,6 @@ export class PacienteComponent implements OnInit {
   }
 
   onDelete(data:any){
-    console.log(data);
     this._pacientes.deletePaciente(data.id_paciente).then((response:any) => {
       if(response.StatusCode == 200){
         this._pacientes.deleteContacto(data.id_contacto).then((response2:any) => {
@@ -70,7 +76,6 @@ export class PacienteComponent implements OnInit {
   }
 
   onConsulta(data:any){
-    console.log('Consulta');
     this.datoConsulta = data;
     $('#addConsulta').modal('show');
   }

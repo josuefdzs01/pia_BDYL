@@ -31,12 +31,12 @@ export class EmpleadoComponent implements OnInit {
     }else{
       this.nameConsultorio = this._auth.responseLogin[0]['Nombre'];
       this.idConsultorio = this._auth.responseLogin[0]['ID'];
-      this.getAllEmpleados(this.idConsultorio)
+      this.getEmpleados(this.idConsultorio)
     }
   }
 
-  getAllEmpleados(userID:any){
-    this._consultorio.getAllEmpleados(userID).then((response:any) => {
+  getEmpleados(userID:any){
+    this._consultorio.getEmpleados(userID).then((response:any) => {
       if(response.length >= 1){
         this.gridView = response;
       }
@@ -49,7 +49,7 @@ export class EmpleadoComponent implements OnInit {
    */
    reloadTable() {
     this.gridView = [];
-    this.getAllEmpleados(this.idConsultorio);
+    this.getEmpleados(this.idConsultorio);
   }
 
   onEdit(data:any){
@@ -58,7 +58,6 @@ export class EmpleadoComponent implements OnInit {
   }
 
   onDelete(data:any){
-    console.log(data);
     this._consultorio.deleteEmpleado(data.id_empleado).then((response:any) => {
       if(response.StatusCode == 200){
         this._toastr.success('Empleado eliminado correctamente');

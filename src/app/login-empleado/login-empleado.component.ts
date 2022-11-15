@@ -15,6 +15,8 @@ export class LoginEmpleadoComponent implements OnInit {
     password: new FormControl('')
   })
 
+  empleado:any;
+
   constructor(private _router: Router,
     private _authService: AuthServiceService,
     private _toastr: ToastrService,
@@ -32,9 +34,16 @@ export class LoginEmpleadoComponent implements OnInit {
     }
     this._authService.loginEmpleado(data).then((response:any) => {
       if(response.StatusCode == 200){
-        this._toastr.success('Inicio sesión con exito');
-        this._spinner.hide();
-        this._router.navigate(['/paciente']);
+        this.empleado = JSON.parse(response.body);
+        if(this.empleado[0]['id_puesto'] == '1'){
+          this._toastr.success('Inicio sesión con exito');
+          this._spinner.hide();
+          this._router.navigate(['/paciente']);
+        }else if(this.empleado[0]['id_puesto'] == '2'){
+          this._toastr.success('Inicio sesión con exito');
+          this._spinner.hide();
+          this._router.navigate(['/secretario']);
+        }
       }else{
         this._toastr.error('Hubo un error al iniciar sesion, intenta nuevamente');
         this._spinner.hide();

@@ -59,29 +59,18 @@
             <option *ngFor="let c of ciudad" [value]="c.id_ciudad">{{c.nombre}}</option>
           </select>
         </div>
+        <div class="col-12 pt-5">
+            <h4> Doctor que realizara la consulta </h4>
+        </div>
+        <div class="col-12 mb-2 input-wrapper w-100">
+            <p style="text-align: initial;"> Doctor: </p>
+            <select class="select-register select-register--emp" formControlName="doctor" id="doctor-select" style="padding: 15px 15px 15px 0px;" required>
+                <option value="" disabled>Selecciona un doctor</option>
+                <option *ngFor="let d of doctores" [value]="d.id_empleado">{{d.nombre_emp}} en un horario de {{d.horas}}</option>
+            </select>
+        </div>
     </div>
   </form>
-    <!-- <div class="row">
-        <div class="col-12">
-            <h4> Consulta </h4>
-        </div>
-        <div class="col-4">
-          <p> Peso: </p>
-          <input type="text" id="pesoConsulta" formControlName="pesoConsulta" class="input form-control" placeholder="Kg">
-        </div>
-        <div class="col-4">
-          <p> Altura: </p>
-          <input type="text" id="alturaConsulta" formControlName="alturaConsulta" class="input form-control" placeholder="Cm">
-        </div>
-        <div class="col-4">
-            <p> Temperatura: </p>
-            <input type="text" id="temperaturaConsulta" formControlName="temperaturaConsulta" class="input form-control" placeholder="Centigrados">
-          </div>
-        <div class="col-12">
-          <p> Padecimientos: </p>
-          <textarea name="padecimiento" id="padecimiento" formControlName="padecimiento" cols="63" rows="10"></textarea>
-        </div>
-    </div> -->
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-primary" (click)="onEditPaciente(pacienteForm.value, contactoEmergForm.value)">Guardar</button>

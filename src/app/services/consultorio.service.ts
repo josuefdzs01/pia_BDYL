@@ -21,9 +21,29 @@ export class ConsultorioService {
     });
   }
 
-  getAllEmpleados(userID: any) {
+  getEmpleados(userID: any) {
     return new Promise((resolve, reject) => {
       this.http.get(environment.url + 'empleado/getAllEmpleado/userID/' + userID).subscribe((response: any) => {
+        resolve(response);
+      }, (error) => {
+        reject(error);
+      });
+    });
+  }
+
+  getDoctor(userID: any, idConsultorio: any) {
+    return new Promise((resolve, reject) => {
+      this.http.get(environment.url + 'empleado/getDoctor/doctor/' + userID + '/idConsul/' + idConsultorio).subscribe((response: any) => {
+        resolve(response);
+      }, (error) => {
+        reject(error);
+      });
+    });
+  }
+
+  getAllEmpleados() {
+    return new Promise((resolve, reject) => {
+      this.http.get(environment.url + 'empleado/getFullEmpleado').subscribe((response: any) => {
         resolve(response);
       }, (error) => {
         reject(error);

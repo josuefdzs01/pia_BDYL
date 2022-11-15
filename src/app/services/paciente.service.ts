@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 export class PacienteService {
   constructor(private http: HttpClient) { }
 
-  getAllPacientes(userID: any) {
+  getPacientes(userID: any) {
     return new Promise((resolve, reject) => {
       this.http.get(environment.url + 'pacienteAPI/getAllPaciente/userID/' + userID).subscribe((response: any) => {
         resolve(response);

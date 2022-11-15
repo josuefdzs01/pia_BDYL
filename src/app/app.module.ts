@@ -20,6 +20,9 @@ import { GridModule } from '@progress/kendo-angular-grid';
 import { EditEmpleadoComponent } from './empleado/edit-empleado/edit-empleado.component';
 import { EditPacienteComponent } from './paciente/edit-paciente/edit-paciente.component';
 import { AddConsultaComponent } from './paciente/add-consulta/add-consulta.component';
+import { SecretarioComponent } from './secretario/secretario.component';
+import { AddCitaComponent } from './secretario/add-cita/add-cita.component';
+import { EditCitaComponent } from './secretario/edit-cita/edit-cita.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,10 @@ import { AddConsultaComponent } from './paciente/add-consulta/add-consulta.compo
     AddEmpleadoComponent,
     EditEmpleadoComponent,
     EditPacienteComponent,
-    AddConsultaComponent
+    AddConsultaComponent,
+    SecretarioComponent,
+    AddCitaComponent,
+    EditCitaComponent
   ],
   imports: [
     BrowserModule,
