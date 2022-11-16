@@ -19,6 +19,9 @@ export class PacienteComponent implements OnInit, OnChanges {
   pacienteData: any;
 
   datoConsulta: any;
+  idConsul: any;
+
+  citaData: any;
 
   constructor(private _consultorio: ConsultorioService,
     private _pacientes: PacienteService,
@@ -31,10 +34,10 @@ export class PacienteComponent implements OnInit, OnChanges {
     if(this._auth.responseEmpleado.length == 0){
       this._router.navigate(['/loginEmpleado']);
     }else{
-
+      this.idConsul = this._auth.responseEmpleado[0]['id_consul'];
       this.nameEmpleado = this._auth.responseEmpleado[0]['name_empleado'];
       this.idEmpleado = this._auth.responseEmpleado[0]['id_empleado'];
-      this.getAllPacientes(this.idEmpleado);
+      this.getCitas(this.idConsul,this.idEmpleado);
     }
   }
 
@@ -44,10 +47,11 @@ export class PacienteComponent implements OnInit, OnChanges {
       })
   }
 
-  getAllPacientes(userID:any){
-    this._pacientes.getPacientes(userID).then((response:any) => {
+  getCitas(idConsul:any,empleadoID:any){
+    this._pacientes.getConsultas(idConsul, empleadoID).then((response:any) => {
       if(response.length >= 1){
         this.gridView = response;
+        console.log(this.gridView);
       }
     })
   }
@@ -58,21 +62,24 @@ export class PacienteComponent implements OnInit, OnChanges {
   }
 
   onDelete(data:any){
-    this._pacientes.deletePaciente(data.id_paciente).then((response:any) => {
-      if(response.StatusCode == 200){
-        this._pacientes.deleteContacto(data.id_contacto).then((response2:any) => {
-          if(response2.StatusCode == 200){
-            this._toastr.success("Paciente eliminado correctamente!");
-            this.reloadTable()
-          }
-        })
-      }
+    this.citaData = data;
+    this._pacientes.deleteCita(data.id_consulta).then((response:any) => {
+      this._pacientes.deletePaciente(data.id_paciente).then((response:any) => {
+        if(response.StatusCode == 200){
+          this._pacientes.deleteContacto(data.id_contacto).then((response2:any) => {
+            if(response2.StatusCode == 200){
+              this._toastr.success("Paciente eliminado correctamente!");
+              this.reloadTable()
+            }
+          })
+        }
+      })
     })
   }
 
   reloadTable() {
     this.gridView = [];
-    this.getAllPacientes(this.idEmpleado);
+    this.getCitas(this.idConsul,this.idEmpleado)
   }
 
   onConsulta(data:any){

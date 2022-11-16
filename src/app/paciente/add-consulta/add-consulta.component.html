@@ -1,27 +1,76 @@
 <div class="modal-body form-empleado">
-    <div class="row">
+    <div *ngIf="datos" class="row">
             <div class="col-12">
                 <h4> Consulta </h4>
             </div>
-            <div class="col-4">
-              <p> Peso: </p>
-              <input type="text" id="pesoConsulta" formControlName="pesoConsulta" class="input form-control" placeholder="Kg">
-            </div>
-            <div class="col-4">
-              <p> Altura: </p>
-              <input type="text" id="alturaConsulta" formControlName="alturaConsulta" class="input form-control" placeholder="Cm">
-            </div>
-            <div class="col-4">
-                <p> Temperatura: </p>
-                <input type="text" id="temperaturaConsulta" formControlName="temperaturaConsulta" class="input form-control" placeholder="Centigrados">
+              <div class="row">
+                <div class="col-12 pt-3">
+                  <h4> Datos personales </h4>
+                </div>
+                <div class="col-12">
+                  <p style="text-align: initial;"> <strong>Nombre:</strong> {{datoConsulta.name_paciente}}</p>
+                </div>
+                <div class="col-12">
+                  <p style="text-align: initial;"> <strong>Fecha de nacimiento:</strong> {{datoConsulta.fechaNac_paciente}}</p>
+                </div>
+                <div class="col-12">
+                  <p style="text-align: initial;"> <strong>Telefono:</strong> {{datoConsulta.phone_paciente}}</p>
+                </div>
+                <div class="col-12">
+                  <p style="text-align: initial;"> <strong>Correo electronico:</strong> {{datoConsulta.email_paciente}}</p>
+                </div>
+                <div class="col-12">
+                  <p style="text-align: initial;"> <strong>Ciudad:</strong> {{datoConsulta.name_pacCiudad}}</p>
+                </div>
+              </div>
+              <div class="col-12 pt-3">
+                <h4> Datos de contacto de emergencia </h4>
               </div>
             <div class="col-12">
-              <p> Padecimientos: </p>
-              <textarea name="padecimiento" id="padecimiento" formControlName="padecimiento" cols="63" rows="10"></textarea>
+              <p style="text-align: initial;"> <strong>Nombre:</strong> {{datoConsulta.name_pacContacto}}</p>
             </div>
+            <div class="col-12">
+              <p style="text-align: initial;"> <strong>Telefono:</strong> {{datoConsulta.phone_pacContacto}}</p>
+            </div>
+            <div class="col-12">
+              <p style="text-align: initial;"> <strong>Correo electronico:</strong> {{datoConsulta.email_pacContacto}}</p>
+            </div>
+            <div class="col-12">
+              <p style="text-align: initial;"> <strong>Ciudad:</strong> {{datoConsulta.ciudad_cont}}</p>
+            </div>
+            <div class="col-12 pt-3">
+                <h4> Doctor que realizara la consulta </h4>
+            </div>
+            <div class="col-12">
+              <p style="text-align: initial;"> <strong>Doctor:</strong> {{datoConsulta.name_empleado}}</p>
+            </div>
+            <form>
+              <div class="row">
+                <div class="col-4">
+                  <p> Peso: </p>
+                  <input type="text" id="pesoConsulta" formControlName="pesoConsulta" class="input form-control" placeholder="Kg">
+                </div>
+                <div class="col-4">
+                  <p> Altura: </p>
+                  <input type="text" id="alturaConsulta" formControlName="alturaConsulta" class="input form-control" placeholder="Cm">
+                </div>
+                <div class="col-4">
+                    <p> Temperatura: </p>
+                    <input type="text" id="temperaturaConsulta" formControlName="temperaturaConsulta" class="input form-control" placeholder="Centigrados">
+                  </div>
+                <div class="col-12">
+                  <p> Padecimientos: </p>
+                  <textarea name="padecimiento" id="padecimiento" formControlName="padecimiento" cols="63" rows="10"></textarea>
+                </div>
+                <div class="col-12">
+                  <p> Medicamento: </p>
+                  <textarea name="medicamento" id="medicamento" formControlName="medicamento" cols="63" rows="8"></textarea>
+                </div>
+              </div>
+            </form>
     </div>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-primary">Guardar</button>
+    <button type="button" class="btn btn-primary" (click)="onSaveConsulta(consultaForm.value)">Guardar</button>
     <button type="button" id="closeModal" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
 </div>

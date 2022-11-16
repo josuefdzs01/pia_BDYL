@@ -38,23 +38,16 @@ export class SecretarioComponent implements OnInit {
       this.nameEmpleado = this._auth.responseEmpleado[0]['name_empleado'];
       this.idConsultorio = this._auth.responseEmpleado[0]['id_consul'];
       this.idEmpleado = this._auth.responseEmpleado[0]['id_consul'];
-      // this.getEmpleados(this.idConsultorio)
-      this.getAllPacientes(this.idConsultorio);
+      this.getCitas(this.idConsultorio);
     }
   }
 
-  // getEmpleados(userID:any){
-  //   this._consultorio.getEmpleados(userID).then((response:any) => {
-  //     if(response.length >= 1){
-  //       this.gridView = response;
-  //     }
-  //   })
-  // }
-
-  getAllPacientes(idConsultorio: any){
-    this._empleado.getPacientes(idConsultorio).then((response:any) => {
+  getCitas(idConsul:any){
+    this._empleado.getAllConsultas(idConsul).then((response:any) => {
+      console.log(response);
       if(response.length >= 1){
         this.gridView = response;
+        console.log(this.gridView);
       }
     })
   }
@@ -83,6 +76,6 @@ export class SecretarioComponent implements OnInit {
    */
      reloadTable() {
       this.gridView = [];
-      this.getAllPacientes(this.idConsultorio);
+      this.getCitas(this.idConsultorio);
     }
 }

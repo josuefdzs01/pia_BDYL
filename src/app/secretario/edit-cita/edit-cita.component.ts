@@ -23,6 +23,11 @@ export class EditCitaComponent implements OnInit, OnChanges {
   turno: any=[];
   doctores?: any=[];
 
+  idEmpleado:any ;
+
+  nameConsultorio:any ;
+  idConsultorio:any ;
+
   pacienteForm = new FormGroup({
     namePaciente: new FormControl('', [Validators.required]),
     birthPaciente: new FormControl('', [Validators.required]),
@@ -37,7 +42,8 @@ export class EditCitaComponent implements OnInit, OnChanges {
     emailEmergencia: new FormControl('', [Validators.required]),
     phoneEmergencia: new FormControl('', [Validators.required]),
     ciudad_contacto: new FormControl('', [Validators.required]),
-    doctor: new FormControl('', [Validators.required])
+    doctor: new FormControl('', [Validators.required]),
+    dateCita: new FormControl('', [Validators.required])
   })
 
   constructor(private _authService: AuthServiceService,
@@ -59,32 +65,37 @@ export class EditCitaComponent implements OnInit, OnChanges {
       emailEmergencia: '',
       phoneEmergencia: '',
       ciudad_contacto: '',
-      doctor: ''
+      doctor: '',
+      dateCita: ''
     })
   }
 
   ngOnInit(): void {
     this.getAllCity();
-    this.getDoctores(this.id_consultorio);
+    this.idConsultorio = this._authService.responseEmpleado[0]['id_consul'];
+    this.getDoctores(this.idConsultorio);
   }
-
+  
   ngOnChanges(): void {
-    this.pacienteID = this.datosEditar.id_paciente;
-    this.pacienteForm.setValue({
-      namePaciente: this.datosEditar.nombre_pac,
-      birthPaciente: this.datosEditar.fechaNac_pac,
-      emailPaciente: this.datosEditar.email_pac,
-      phonePaciente: this.datosEditar.phone_pac,
-      contactoEmergID: this.datosEditar.id_contacto,
-      ciudad_pac: this.datosEditar.id_ciudad
-    })
-    this.contactoEmergForm.setValue({
-      nameEmergencia: this.datosEditar.name_cont,
-      emailEmergencia: this.datosEditar.email_cont,
-      phoneEmergencia: this.datosEditar.phone_cont,
-      ciudad_contacto: this.datosEditar.id_ciudadCont,
-      doctor: this.datosEditar.id_emp
-    })
+    if(this.datosEditar != undefined){
+      this.pacienteID = this.datosEditar.id_pacConsulta;
+      this.pacienteForm.setValue({
+        namePaciente: this.datosEditar.name_paciente,
+        birthPaciente: this.datosEditar.fechaNac_paciente,
+        emailPaciente: this.datosEditar.email_paciente,
+        phonePaciente: this.datosEditar.phone_paciente,
+        contactoEmergID: this.datosEditar.id_pacContacto,
+        ciudad_pac: this.datosEditar.id_ciudadPaciente
+      })
+      this.contactoEmergForm.setValue({
+        nameEmergencia: this.datosEditar.name_pacContacto,
+        emailEmergencia: this.datosEditar.email_pacContacto,
+        phoneEmergencia: this.datosEditar.phone_pacContacto,
+        ciudad_contacto: this.datosEditar.id_ciudadContFK,
+        doctor: this.datosEditar.id_empleado,
+        dateCita: this.datosEditar.fechaCita
+      })
+    }
   }
 
   getAllCity(){
@@ -101,7 +112,8 @@ export class EditCitaComponent implements OnInit, OnChanges {
       phone_contacto: dataContacto.phoneEmergencia,
       id_ciudadContFK: dataContacto.ciudad_contacto
     }
-    this._paciente.editContacto(contacto, this.datosEditar.id_contacto).then((response: any) => {
+    console.log(this.datosEditar);
+    this._paciente.editContacto(contacto, this.datosEditar.id_pacContacto).then((response: any) => {
       this._paciente.getAllContactos(contacto.email_contacto).then((response2:any) => {
         let pacienteNew = {
           name_paciente: dataPaciente.namePaciente,
@@ -110,20 +122,32 @@ export class EditCitaComponent implements OnInit, OnChanges {
           fechaNac_paciente: dataPaciente.birthPaciente,
           id_ciudadPacFK: dataPaciente.ciudad_pac,
           id_contacto:response2[0]['id_contacto'],
-          id_empleado: dataContacto.doctor
+          id_empleado: dataContacto.doctor,
         }
-        this._paciente.editPaciente(pacienteNew, this.datosEditar.id_paciente).then((response3:any) => {
-          if(response.StatusCode == 200){
-            this._spinner.hide();
-            this._toastr.success('Paciente editado correctamente.');
-            this.reloadTable.emit('saveOk');
-            this.pacienteForm.reset()
-            this.contactoEmergForm.reset()
-            $('#closeModal').click();
-          }else if(response.StatusCode == 100) {
-            this._toastr.error('Hubo un error al dar de alta el empleado, intenta de nuevo.');
-            this._spinner.hide();
-          }
+        this._paciente.editPaciente(pacienteNew, this.datosEditar.id_pacConsulta).then((response3:any) => {
+          this._toastr.success('Paciente dado de alta.');
+            let cita = {
+              id_pacConsulta: this.datosEditar.id_pacConsulta,
+              id_empConsulta: this.datosEditar.id_empleado,
+              fechaCita: dataContacto.dateCita,
+              peso: '1',
+              altura: '1',
+              temperatura: '1',
+              padecimiento: '1'
+            }
+            this._paciente.editCita(cita, cita.id_pacConsulta).then((response5:any) => {
+              if(response.StatusCode == 200){
+                this._toastr.success('Cita editada.');
+                this._spinner.hide();
+                this.reloadTable.emit('saveOk');
+                this.pacienteForm.reset()
+                this.contactoEmergForm.reset()
+                $('#closeModal').click();
+              }else if(response.StatusCode == 100) {
+                this._toastr.error('Hubo un error al dar de alta el empleado, intenta de nuevo.');
+                this._spinner.hide();
+              }
+            })
         })
       })
     })
@@ -134,5 +158,4 @@ export class EditCitaComponent implements OnInit, OnChanges {
       this.doctores = doctor;
     })
   }
-
 }

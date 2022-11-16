@@ -69,6 +69,10 @@
                 <option *ngFor="let d of doctores" [value]="d.id_empleado">{{d.nombre_emp}} en un horario de {{d.horas}}</option>
             </select>
         </div>
+        <div class="col-12">
+          <p style="text-align: initial;"> Fecha de cita: </p>
+          <input type="date" id="dateCita" formControlName="dateCita" class="input form-control" placeholder="Fecha de cita" required>
+        </div>
     </div>
   </form>
 </div>

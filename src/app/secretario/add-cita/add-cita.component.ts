@@ -33,7 +33,8 @@ export class AddCitaComponent implements OnInit, OnChanges {
     emailEmergencia: new FormControl('', [Validators.required]),
     phoneEmergencia: new FormControl('', [Validators.required]),
     ciudad_contacto: new FormControl('', [Validators.required]),
-    doctor: new FormControl('', [Validators.required])
+    doctor: new FormControl('', [Validators.required]),
+    dateCita: new FormControl('', [Validators.required])
   })
 
   constructor(private _authService: AuthServiceService,
@@ -45,10 +46,13 @@ export class AddCitaComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.getAllCity();
-    this.getDoctores(this.id_consultorio);
+    if(this.id_consultorio != undefined){
+      this.getDoctores(this.id_consultorio);
+    }
   }
   
   ngOnChanges(): void {
+    // this.getDoctores(this.id_consultorio);
   }
 
   onAddPaciente(dataPac:any, dataCont:any){
@@ -70,17 +74,32 @@ export class AddCitaComponent implements OnInit, OnChanges {
           id_empleado: dataCont.doctor
         }
         this._paciente.registerPaciente(pacienteNew).then((response3:any) => {
-          if(response.StatusCode == 200){
-            this._spinner.hide();
+          this._paciente.getPacienteUnique(pacienteNew.email_paciente).then((paciente:any) => {
             this._toastr.success('Paciente dado de alta.');
-            this.reloadTable.emit('saveOk');
-            this.pacienteForm.reset()
-            this.contactoEmergForm.reset()
-            $('#closeModal').click();
-          }else if(response.StatusCode == 100) {
-            this._toastr.error('Hubo un error al dar de alta el empleado, intenta de nuevo.');
-            this._spinner.hide();
-          }
+            let cita = {
+              id_pacConsulta: paciente[0]['id_paciente'],
+              id_empConsulta: dataCont.doctor,
+              fechaCita: dataCont.dateCita,
+              peso: '1',
+              altura: '1',
+              temperatura: '1',
+              padecimiento: '1',
+              medicamento: '1'
+            }
+            this._paciente.registerCita(cita).then((response5:any) => {
+              if(response.StatusCode == 200){
+                this._toastr.success('Cita agendada.');
+                this._spinner.hide();
+                this.reloadTable.emit('saveOk');
+                this.pacienteForm.reset()
+                this.contactoEmergForm.reset()
+                $('#closeModal').click();
+              }else if(response.StatusCode == 100) {
+                this._toastr.error('Hubo un error al dar de alta el empleado, intenta de nuevo.');
+                this._spinner.hide();
+              }
+            })
+          })
         })
       })
     })
