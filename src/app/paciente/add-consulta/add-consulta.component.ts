@@ -6,6 +6,9 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
 import { ConsultorioService } from 'src/app/services/consultorio.service';
 import { PacienteService } from 'src/app/services/paciente.service';
+import jspfd from 'jspdf'
+import html2canvas from 'html2canvas';
+import 'jspdf-autotable'
 declare var $: any;
 
 @Component({
@@ -60,6 +63,7 @@ export class AddConsultaComponent implements OnInit, OnChanges {
         this._paciente.editCita(cita, cita.id_pacConsulta).then((response:any) => {
           if(response.StatusCode == 200){
             this._toastr.success('Cita editada.');
+            this.openPDF();
             this._spinner.hide();
             this.reloadTable.emit('saveOk');
             this.consultaForm.reset()
@@ -69,5 +73,18 @@ export class AddConsultaComponent implements OnInit, OnChanges {
             this._spinner.hide();
           }
         })
+  }
+
+  public openPDF(): void {
+    let DATA: any = document.getElementById('consulta');
+    html2canvas(DATA).then((canvas) => {
+      let fileWidth = 150;
+      let fileHeight = (canvas.height * fileWidth) / canvas.width;
+      const FILEURI = canvas.toDataURL('../../../assets/img/Medic Search.png');
+      let PDF = new jspfd('p', 'mm', 'a4');
+      let position = 0;
+      PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
+      PDF.save('receta.pdf');
+    });
   }
 }

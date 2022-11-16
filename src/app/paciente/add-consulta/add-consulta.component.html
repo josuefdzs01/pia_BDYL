@@ -1,20 +1,38 @@
-<div class="modal-body form-empleado">
+<div id="consulta" class="modal-body form-empleado">
     <div *ngIf="datos" class="row">
-            <div class="col-12">
-                <h4> Consulta </h4>
+            <div class="col-12 row text-center">
+              <div class="col-6">
+                <img class="home-img" src="../../../assets/img/logoPIA.jpeg" alt="">
+              </div>
+              <div class="col-6 row">
+                <div class="col-12">
+                  <h4> Consulta </h4>
+                </div>
+                <div class="col-12">
+                  <h4> {{datoConsulta.name_consul}} </h4>
+                </div>
+              </div>
+            </div>
+            <div class="row text-center mt-2">
+              <div class="col-6">
+                {{datoConsulta.phone_consul}}
+              </div>
+              <div class="col-6">
+                {{datoConsulta.name_pacCiudad}}
+              </div>
             </div>
               <div class="row">
                 <div class="col-12 pt-3">
                   <h4> Datos personales </h4>
                 </div>
-                <div class="col-12">
+                <div class="col-6">
                   <p style="text-align: initial;"> <strong>Nombre:</strong> {{datoConsulta.name_paciente}}</p>
+                </div>
+                <div class="col-6">
+                  <p style="text-align: initial;"> <strong>Telefono:</strong> {{datoConsulta.phone_paciente}}</p>
                 </div>
                 <div class="col-12">
                   <p style="text-align: initial;"> <strong>Fecha de nacimiento:</strong> {{datoConsulta.fechaNac_paciente}}</p>
-                </div>
-                <div class="col-12">
-                  <p style="text-align: initial;"> <strong>Telefono:</strong> {{datoConsulta.phone_paciente}}</p>
                 </div>
                 <div class="col-12">
                   <p style="text-align: initial;"> <strong>Correo electronico:</strong> {{datoConsulta.email_paciente}}</p>
@@ -26,10 +44,10 @@
               <div class="col-12 pt-3">
                 <h4> Datos de contacto de emergencia </h4>
               </div>
-            <div class="col-12">
+            <div class="col-6">
               <p style="text-align: initial;"> <strong>Nombre:</strong> {{datoConsulta.name_pacContacto}}</p>
             </div>
-            <div class="col-12">
+            <div class="col-6">
               <p style="text-align: initial;"> <strong>Telefono:</strong> {{datoConsulta.phone_pacContacto}}</p>
             </div>
             <div class="col-12">
@@ -58,13 +76,13 @@
                     <p> Temperatura: </p>
                     <input type="text" id="temperaturaConsulta" formControlName="temperaturaConsulta" class="input form-control" placeholder="Centigrados">
                   </div>
-                <div class="col-12">
+                <div class="col-6">
                   <p> Padecimientos: </p>
-                  <textarea name="padecimiento" id="padecimiento" formControlName="padecimiento" cols="63" rows="10"></textarea>
+                  <textarea name="padecimiento" id="padecimiento" formControlName="padecimiento" cols="30" rows="5"></textarea>
                 </div>
-                <div class="col-12">
+                <div class="col-6">
                   <p> Medicamento: </p>
-                  <textarea name="medicamento" id="medicamento" formControlName="medicamento" cols="63" rows="8"></textarea>
+                  <textarea name="medicamento" id="medicamento" formControlName="medicamento" cols="28" rows="5"></textarea>
                 </div>
               </div>
             </form>
