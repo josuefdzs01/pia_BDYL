@@ -1,5 +1,5 @@
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Component, Input, OnInit, OnChanges, SimpleChanges, EventEmitter, Output } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
@@ -44,10 +44,13 @@ export class AddConsultaComponent implements OnInit, OnChanges {
   }
 
   onSaveConsulta(form:any){
+    const [dateComponents, timeComponents] = this.datos.fechaCita.split(' ');
+    const [day,month,year] = dateComponents.split('/');  
+    console.log(month,day,year);
         let cita = {
           id_pacConsulta: this.datos.id_pacConsulta,
           id_empConsulta: this.datos.id_empleado,
-          fechaCita: Date,
+          fechaCita: year + '/' + month + '/' + day,
           peso: form.pesoConsulta,
           altura: form.alturaConsulta,
           temperatura: form.temperaturaConsulta,
@@ -57,7 +60,7 @@ export class AddConsultaComponent implements OnInit, OnChanges {
         this._paciente.editCita(cita, cita.id_pacConsulta).then((response:any) => {
           if(response.StatusCode == 200){
             this._toastr.success('Cita editada.');
-            this.createPDF();
+            this._spinner.hide();
             this.reloadTable.emit('saveOk');
             this.consultaForm.reset()
             $('#closeModal').click();
@@ -66,17 +69,5 @@ export class AddConsultaComponent implements OnInit, OnChanges {
             this._spinner.hide();
           }
         })
-  }
-
-  createPDF(){
-    var dd = {
-      content: [
-        {
-          image: '../../../assets/img/Medic Search.png',
-          width: 150
-        },
-      ]
-    }
-    this._spinner.hide();
   }
 }
