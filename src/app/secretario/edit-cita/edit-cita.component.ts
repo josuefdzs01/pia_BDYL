@@ -112,42 +112,45 @@ export class EditCitaComponent implements OnInit, OnChanges {
       phone_contacto: dataContacto.phoneEmergencia,
       id_ciudadContFK: dataContacto.ciudad_contacto
     }
-    console.log(this.datosEditar);
     this._paciente.editContacto(contacto, this.datosEditar.id_pacContacto).then((response: any) => {
       this._paciente.getAllContactos(contacto.email_contacto).then((response2:any) => {
+        const [dateComponents, timeComponents] = dataPaciente.birthPaciente.split(' ');
+        const [day,month,year] = dateComponents.split('/');  
         let pacienteNew = {
           name_paciente: dataPaciente.namePaciente,
           email_paciente: dataPaciente.emailPaciente,
           phone_paciente: dataPaciente.phonePaciente,
-          fechaNac_paciente: dataPaciente.birthPaciente,
+          fechaNac_paciente: year + '/' + month + '/' + day,
           id_ciudadPacFK: dataPaciente.ciudad_pac,
           id_contacto:response2[0]['id_contacto'],
-          id_empleado: dataContacto.doctor,
+          id_empleado: dataContacto.doctor
         }
         this._paciente.editPaciente(pacienteNew, this.datosEditar.id_pacConsulta).then((response3:any) => {
-          this._toastr.success('Paciente dado de alta.');
+          this._paciente.getPacienteUnique(pacienteNew.email_paciente).then((paciente:any) => {
             let cita = {
-              id_pacConsulta: this.datosEditar.id_pacConsulta,
-              id_empConsulta: this.datosEditar.id_empleado,
+              id_pacConsulta: paciente[0]['id_paciente'],
+              id_empConsulta: dataContacto.doctor,
               fechaCita: dataContacto.dateCita,
               peso: '1',
               altura: '1',
               temperatura: '1',
-              padecimiento: '1'
+              padecimiento: '1',
+              medicamento: '1'
             }
             this._paciente.editCita(cita, cita.id_pacConsulta).then((response5:any) => {
-              if(response.StatusCode == 200){
+              if(response5.StatusCode == 200){
                 this._toastr.success('Cita editada.');
                 this._spinner.hide();
                 this.reloadTable.emit('saveOk');
                 this.pacienteForm.reset()
                 this.contactoEmergForm.reset()
-                $('#closeModal').click();
-              }else if(response.StatusCode == 100) {
+                $('#close').click();
+              }else if(response5.StatusCode == 100) {
                 this._toastr.error('Hubo un error al dar de alta el empleado, intenta de nuevo.');
                 this._spinner.hide();
               }
             })
+          })
         })
       })
     })

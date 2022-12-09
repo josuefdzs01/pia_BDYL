@@ -24,6 +24,8 @@ export class SecretarioComponent implements OnInit {
   pacienteData: any;
   datoConsulta: any;
 
+  citaData: any;
+
   constructor(private _consultorio: ConsultorioService,
     private _auth: AuthServiceService,
     private _empleado: PacienteService,
@@ -44,10 +46,8 @@ export class SecretarioComponent implements OnInit {
 
   getCitas(idConsul:any){
     this._empleado.getAllConsultas(idConsul).then((response:any) => {
-      console.log(response);
       if(response.length >= 1){
         this.gridView = response;
-        console.log(this.gridView);
       }
     })
   }
@@ -58,14 +58,13 @@ export class SecretarioComponent implements OnInit {
   }
 
   onDelete(data:any){
-    this._empleado.deletePaciente(data.id_paciente).then((response:any) => {
+    this.citaData = data;
+    this._empleado.deleteCita(data.id_consulta).then((response:any) => {
       if(response.StatusCode == 200){
-        this._empleado.deleteContacto(data.id_contacto).then((response2:any) => {
-          if(response2.StatusCode == 200){
-            this._toastr.success("Paciente eliminado correctamente!");
-            this.reloadTable()
-          }
-        })
+        this._toastr.success("Paciente eliminado correctamente!");
+        this.reloadTable();
+      }else{
+        this._toastr.success("Hubo un error al eliminar el cliente");
       }
     })
   }

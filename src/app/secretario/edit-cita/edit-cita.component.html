@@ -1,6 +1,6 @@
 <div class="modal-header">
     <h5 class="modal-title">Editar paciente</h5>
-    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+    <button type="button" id="close" class="close" data-bs-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
 </div>
@@ -78,5 +78,5 @@
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-primary" (click)="onEditPaciente(pacienteForm.value, contactoEmergForm.value)">Guardar</button>
-  <button type="button" id="cancel-btn" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+  <button type="button" id="closeModal" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
 </div>

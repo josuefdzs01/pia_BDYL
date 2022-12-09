@@ -42,14 +42,12 @@ export class AddConsultaComponent implements OnInit, OnChanges {
   ngOnChanges(): void {
     if(this.datoConsulta != undefined){
       this.datos = this.datoConsulta;
-      console.log(this.datoConsulta);
     };
   }
 
   onSaveConsulta(form:any){
     const [dateComponents, timeComponents] = this.datos.fechaCita.split(' ');
     const [day,month,year] = dateComponents.split('/');  
-    console.log(month,day,year);
         let cita = {
           id_pacConsulta: this.datos.id_pacConsulta,
           id_empConsulta: this.datos.id_empleado,

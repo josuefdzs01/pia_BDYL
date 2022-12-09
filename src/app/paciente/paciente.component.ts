@@ -51,7 +51,6 @@ export class PacienteComponent implements OnInit, OnChanges {
     this._pacientes.getConsultas(idConsul, empleadoID).then((response:any) => {
       if(response.length >= 1){
         this.gridView = response;
-        console.log(this.gridView);
       }
     })
   }
@@ -64,16 +63,10 @@ export class PacienteComponent implements OnInit, OnChanges {
   onDelete(data:any){
     this.citaData = data;
     this._pacientes.deleteCita(data.id_consulta).then((response:any) => {
-      this._pacientes.deletePaciente(data.id_paciente).then((response:any) => {
-        if(response.StatusCode == 200){
-          this._pacientes.deleteContacto(data.id_contacto).then((response2:any) => {
-            if(response2.StatusCode == 200){
-              this._toastr.success("Paciente eliminado correctamente!");
-              this.reloadTable()
-            }
-          })
-        }
-      })
+      if(response.StatusCode == 200){
+        this._toastr.success("Paciente eliminado correctamente!");
+        this.reloadTable()
+      }
     })
   }
 
